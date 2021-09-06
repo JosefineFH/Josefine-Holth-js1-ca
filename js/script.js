@@ -6,45 +6,40 @@ const content = document.querySelector(".content");
 const sortBooks = document.querySelector("#authors");
 
 fetch(url)
-.then(response => {
-    return response.json();
-})
-.then(data => {
-    // console.log(data.items);
-    const booksInMyLibrary = data.items;
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        const booksInMyLibrary = data.items;
+        const authorsArray = [];
 
-    for(let i = 0; i < booksInMyLibrary.length; i++){
-        const bookInfo = booksInMyLibrary[i].volumeInfo;
-        // console.log(bookInfo)
-        const bookTitle = bookInfo.title;
-        const bookId = booksInMyLibrary[i].id;
-        const bookThumbnail = bookInfo.imageLinks.thumbnail;
-        const authors = bookInfo.authors[0];
+        for (let i = 0; i < booksInMyLibrary.length; i++) {
+            const bookInfo = booksInMyLibrary[i].volumeInfo;
+            const bookTitle = bookInfo.title;
+            const bookId = booksInMyLibrary[i].id;
+            const bookThumbnail = bookInfo.imageLinks.thumbnail;
+            const authors = bookInfo.authors[0];
 
-        content.innerHTML += `
+            authorsArray.push(authors)
+
+            content.innerHTML += `
         <div class="card">
             <img src="${bookThumbnail}" alt="${bookTitle}">
             <h2>${bookTitle}</h2>
             <p>${authors}</p>
             <a href="details.html?id=${bookId}" class="readMore">Read More</a>
         </div>`
+        }
 
-        sortBooks.innerHTML += `
-        <option value="${authors}">${authors}</option>
-        `
+        // remove the dobble valuse in the array with authors
+        let removeDubbleValuse = [...new Set(authorsArray)];
+        for (let a = 0; a < removeDubbleValuse.length; a++) {
+            const author = removeDubbleValuse[a];
 
-        
-    }
-})
-.catch(error => {
-    console.log(error)
-})
-
-// sort books by author
-// function sortBookByAurthors(authors){
-//     console.log("test")
-//     sortBooks.innerHTML += `
-//         <option value="${authors}">${authors}</option>
-//     `
-// }
-// sortBookByAurthors();
+            sortBooks.innerHTML += `
+            <option value="${author}">${author}</option>`
+        }
+    })
+    .catch(error => {
+        console.log(error)
+    })
