@@ -5,6 +5,8 @@ const subject = document.querySelector("#subject");
 const email = document.querySelector("#email");
 const address = document.querySelector("#address");
 
+// const formError = document.querySelector(".form-error");
+
 
 function formValidation(event){
     event.preventDefault();
@@ -14,20 +16,22 @@ function formValidation(event){
 
     if(!lengthCheck(name.value, 0) === true){
         outptuNameError.innerHTML += `<p>You have to put in your name</p>`;
+        outptuNameError.className = "errorStyle"
     }
 
     if(!lengthCheck(subject.value, 10) === true){
-        outptuNameError.innerHTML += `<p>Subject is missing</p>`;
+        outptuNameError.innerHTML += `<p>Subject is missing. It has to contain at least 10 characters</p>`;
     } 
 
     if(!emailValidation(email.value) === true){
-        outptuNameError.innerHTML += `<p>Email is invalid</p>`;
+        outptuNameError.innerHTML += `<p>Email is invalid or missing</p>`;
     } 
 
     if(!lengthCheck(address.value, 25) === true){
-        outptuNameError.innerHTML += `<p>Your address is missing</p>`;
+        outptuNameError.innerHTML += `<p>Your address is missing. It has to contain 25 characters</p>`;
     } else {
-        outptuNameError.innerHTML = `<p>Your form has been send</p>`;
+        outptuNameError.innerHTML = `<p>Your message has been send to us</p>`;
+        outptuNameError.className = "messageStyle";
     }
 }
 
