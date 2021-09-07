@@ -6,6 +6,14 @@
   --nuito-sans-headerFont-two: "Nunito Sans", sans-serif;
   --palanquin-main-text: "Palanquin", sans-serif;
   --magilio: 'Magilio Regular', sans-serif;
+
+  /* colors */
+  --light-purple: #C86B98;
+  --midium-purple: #632B6C;
+  --dark-purple: #280F36;
+  --ligth-salmon-color: #FFC1A0;
+  --darker-salmon-color: #FD9C7F;
+  --red: #B31E1A;
 }
 body{
     padding-top: 20px;
@@ -41,6 +49,7 @@ h1{
     font-size: 4rem;
     text-align: center;
     font-family: var(--vollkorn-main-header-font);
+    color: var(--dark-purple);
 }
 h2, p{
     font-family: var(--nuito-sans-headerFont-two);
@@ -53,15 +62,49 @@ header li a {
     font-weight: bolder;
     text-decoration: none;
     font-size: 20px;
-    background-color: indianred;
+    background-color: var(--midium-purple);
     color: ivory;
     padding: 10px 20px;
 }
 .card a{
-    background-color: lightcoral;
+    background-color: var(--midium-purple);
+    color: white;
     max-width: 150px;
 }
 
 img{
     max-width: 150px;
 }
+
+form{
+    max-width: 1200px;
+}
+
+.errorStyle {
+    width: 100%;
+    padding: 25px;
+    background-color: var(--red);
+    color: white;
+    box-sizing: border-box;
+  }
+
+  .messageStyle{
+    background-color: var(--midium-purple);
+    color: white;
+    box-sizing: border-box;
+    padding: 25px;
+    width: 100%;
+    text-align: center;
+  }
+
+  select{
+      background-color: var(--light-purple);
+      color: white;
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 15px;
+
+      display: block;
+      margin: 0 auto;
+    }
