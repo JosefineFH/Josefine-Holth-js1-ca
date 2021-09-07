@@ -1,12 +1,8 @@
-<<<<<<< Updated upstream
-const userId = "104468396673656781435";
-const bookSelf = "1001"
-const url = `https://www.googleapis.com/books/v1/users/${userId}/bookshelves/${bookSelf}/volumes`;
-=======
+
   const userId = "104468396673656781435";
   const bookSelf = "1001"
   const url = `https://www.googleapis.com/books/v1/users/${userId}/bookshelves/${bookSelf}/volumes?maxResults=40`;
->>>>>>> Stashed changes
+
 
   const content = document.querySelector(".content");
   const sortBooks = document.querySelector("#authors");
