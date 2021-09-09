@@ -4,7 +4,7 @@ const id = params.get("id");
 
 const urlWithParams = `https://www.googleapis.com/books/v1/volumes/${id}`;
 
-const contant = document.querySelector(".mainContent");
+const content = document.querySelector(".mainContent");
 
 async function fetchBookDetails(){
     try{
@@ -24,7 +24,7 @@ async function fetchBookDetails(){
 
         // console.log(title, subtitle, author, description,)
         
-        contant.innerHTML += `
+        content.innerHTML += `
             <div>
                 <h2>${title} - ${subtitle}</h2>
                 <h3>${author}</h3>
@@ -32,8 +32,12 @@ async function fetchBookDetails(){
                 <p>${description}</p>
             </div>
         `
+        // Gives title its value/text
+        document.title = `About ${title}`;
     }catch(error){
         console.log(error)
+        console.log("An error occurred");
+        content.innerHTML = errorMessage(` <p>${error}.</p> <p>404 - An error occurred when calling the API. Check that user id and bookself id is correct.</p>`);
     }
 }
 

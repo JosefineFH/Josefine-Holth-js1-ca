@@ -9,7 +9,8 @@ const sortBooks = document.querySelector("#authors");
 const select = document.querySelector("select");
 
 let global = [];
-
+// ? add a search field?
+// ? Make this in to a function
 fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -17,11 +18,19 @@ fetch(url)
         console.log(global)
         createHTML();
     })
-    .catch(error => console.log(error))
+    .catch(error => {
+        console.log("An error occurred");
+        content.innerHTML = errorMessage(` <p>${error}.</p> <p>404 - An error occurred when calling the API. Check that user id and bookself id is correct.</p>`);
 
-function createHTML(results) {
+    })
+
+function createHTML() {
     const booksInMyLibrary = global;
     const authorsArray = [];
+
+    document.title = `My library`;
+
+    // ? do this with a foreach?
 
     for (let i = 0; i < booksInMyLibrary.length; i++) {
         const bookInfo = booksInMyLibrary[i].volumeInfo;
@@ -36,12 +45,15 @@ function createHTML(results) {
         <div class="card">
         <img src="${bookThumbnail}" alt="${bookTitle}">
         <h2>${bookTitle}</h2>
-            <a href="details.html?id=${bookId}" class="readMore">Read More</a>
-            </div>`
+        <p>${authors}</p>
+        <a href="details.html?id=${bookId}" class="readMore">Read More</a>
+        </div>`
     }
 
     // remove the dobble valuse in the array with authors
     let removeDubbleValuse = [...new Set(authorsArray)];
+
+    // Outputs the options in the selction list. 
     for (let a = 0; a < removeDubbleValuse.length; a++) {
         const author = removeDubbleValuse[a];
 
@@ -57,6 +69,8 @@ function viewBooksByChoiucenAuthor(event) {
     const selectedAuthor = event.target.value;
     const newHeading = document.querySelector("h1");
 
+    document.title = `Books by ${selectedAuthor}`;
+
     newHeading.innerHTML = `
             <div class="simpleLine">
                 <h1>Books by ${selectedAuthor} in your library</h1>
@@ -71,13 +85,14 @@ function viewBooksByChoiucenAuthor(event) {
         if (selectedAuthor === authorFromGlobalVar) {
             content.innerHTML += `
             <div class="card">
-                <img src="${booksInMyLibrary.imageLinks.thumbnail}" alt="${booksInMyLibrary.title}">
-                <h2>${booksInMyLibrary.title}</h2>
-                <p>${authorFromGlobalVar}</p>
-                <a href="details.html?id=${global[s].id}" class="readMore">Read More</a>
+            <img src="${booksInMyLibrary.imageLinks.thumbnail}" alt="${booksInMyLibrary.title}">
+            <h2>${booksInMyLibrary.title}</h2>
+            <p>${authorFromGlobalVar}</p>
+            <a href="details.html?id=${global[s].id}" class="readMore">Read More</a>
             </div>`
         }
     }
+
     if (selectedAuthor === "allAuthors") {
         newHeading.innerHTML = `<div class="simpleLine">
         <h1>All your books in your Library</h1>
