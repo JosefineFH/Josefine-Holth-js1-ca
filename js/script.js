@@ -5,26 +5,36 @@ const url = `https://www.googleapis.com/books/v1/users/${userId}/bookshelves/${b
 
 const content = document.querySelector(".content");
 const sortBooks = document.querySelector("#authors");
+const loading  = document.querySelector(".loaderContent");
 
 const select = document.querySelector("select");
 
 let global = [];
 // ? add a search field?
 // ? Make this in to a function
+
+setTimeout(function () {
 fetch(url)
     .then(response => response.json())
     .then(data => {
         global = data.items;
-        console.log(global)
+        console.log(global);
         createHTML();
     })
     .catch(error => {
         console.log("An error occurred");
         content.innerHTML = errorMessage(` <p>${error}.</p> <p>404 - An error occurred when calling the API. Check that user id and bookself id is correct.</p>`);
 
-    })
+    }) 
+
+    console.log("done loading!")
+    loading.classList.add("hide");
+
+}, 1500);
+
 
 function createHTML() {
+    
     const booksInMyLibrary = global;
     const authorsArray = [];
 
@@ -69,14 +79,19 @@ function viewBooksByChoiucenAuthor(event) {
     const selectedAuthor = event.target.value;
     const newHeading = document.querySelector("h1");
 
+    content.innerHTML = "";
+
+    loading.classList.remove("hide");
+
+    setTimeout(function () {
+        
+    loading.classList.add("hide");
     document.title = `Books by ${selectedAuthor}`;
 
     newHeading.innerHTML = `
             <div class="simpleLine">
                 <h1>Books by ${selectedAuthor} in your library</h1>
             </div>`;
-
-    content.innerHTML = "";
 
     for (let s = 0; s < global.length; s++) {
         const booksInMyLibrary = global[s].volumeInfo;
@@ -92,15 +107,15 @@ function viewBooksByChoiucenAuthor(event) {
             </div>`
         }
     }
-
     if (selectedAuthor === "allAuthors") {
         newHeading.innerHTML = `<div class="simpleLine">
         <h1>All your books in your Library</h1>
         </div>`
-
+        
         sortBooks.innerHTML = ""
         sortBooks.innerHTML += `<option value="allAuthors">All authors</option>`
-
+        
         createHTML();
     }
+}, 1500);
 }
