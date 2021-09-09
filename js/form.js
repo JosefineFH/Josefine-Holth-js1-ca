@@ -10,7 +10,7 @@ const address = document.querySelector("#address");
 
 function formValidation(event){
     event.preventDefault();
-    console.log(name.value)
+    console.log(name.value);
 
     outptuNameError.innerHTML = "";
 
@@ -18,28 +18,28 @@ function formValidation(event){
         outptuNameError.innerHTML += `<p>You have to put in your name</p>`;
         outptuNameError.className = "error"
     }
-
     if(!lengthCheck(subject.value, 10) === true){
         outptuNameError.innerHTML += `<p>Subject is missing. It has to contain at least 10 characters</p>`;
-    } 
-
-    if(!lengthCheck(address.value, 25) === true){
-        outptuNameError.innerHTML += `<p>Your address is missing. It has to contain 25 characters</p>`;
+        outptuNameError.className = "error"
     } 
     if(!emailValidation(email.value) === true){
         outptuNameError.innerHTML += `<p>Email is invalid or missing</p>`;
+        outptuNameError.className = "error"
     } 
-
-    else {
+    if(!lengthCheck(address.value, 25) === true){
+        outptuNameError.innerHTML += `<p>Your address is missing. It has to contain 25 characters</p>`;
+        outptuNameError.className = "error"
+    } else {
         outptuNameError.innerHTML = `<p>Your message has been send to us</p>`;
         outptuNameError.className = "messageStyle";
+
         setTimeout(function() {
             form.submit()
         }, 3000)
     }
 }
 
-form.addEventListener("submit", formValidation);
+
 function emailValidation(email){
     const symbols =  /\S+@\S+\.\S+/;
     const pattern = symbols.test(email);
@@ -52,3 +52,5 @@ function lengthCheck(value, len){
         return false;
     }
 }
+
+form.addEventListener("submit", formValidation);
