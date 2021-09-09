@@ -40,6 +40,7 @@ I chose an google book api that is connected to my own google book account by us
 1. Inside of your bookshelf url ther is a peac of your code that says coll= the number that fallows is the bookshelf id. 
 2. You can now paist that in bookSelf variable on line 2 in script.js
 
+![screenshot from google books](https://photos.google.com/search/_tra_/photo/AF1QipNZv-h-OILIJWLFYVXy7-a1R6xNCRb-i1FVrQYT)
 
 #updates I want to do
 1. Make it posssible to type in your id and bookshelf id in an input field so it wil be used in the api call. But for the school assigment I have coded in my own user and bookshelf id.
