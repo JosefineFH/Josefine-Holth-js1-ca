@@ -11,8 +11,6 @@ async function fetchBookDetails() {
     try {
         const response = await fetch(urlWithParams);
         const details = await (response.json())
-        // volumeInfo.imageLinks.extraLarge
-        console.log(details);
 
         const bookDetails = details.volumeInfo;
 
@@ -21,10 +19,7 @@ async function fetchBookDetails() {
         const author = bookDetails.authors;
         const description = bookDetails.description;
         const bookImage = bookDetails.imageLinks.thumbnail;
-        console.log(bookImage)
-
-        // console.log(title, subtitle, author, description,)
-
+        
         content.innerHTML += `
         <div>
             <img src="${bookImage}" alt="${title}">
@@ -35,18 +30,16 @@ async function fetchBookDetails() {
         </div>
         <div class="text">
             <p>${description}</p>
-        </div>
-        `
-        // Gives title its value/text
+        </div>`
         document.title = `About ${title}`;
     } catch (error) {
         content.classList.add("mainContentError");
         console.log(error)
         console.log("An error occurred");
-        content.innerHTML = errorMessage(` <p>${error}.</p> <p>404 - An error occurred when calling the API. Check that user id and bookself id is correct.</p>`);
+        content.innerHTML = errorMessage(` <p>${error}.</p> <p>404 - An error occurred when calling the API. Check that book id is correct.</p>`);
     }
 }
 setTimeout(function () {
     loading.classList.add("hide");
     fetchBookDetails();
-}, 1500);
+}, 1000);
