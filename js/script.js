@@ -10,27 +10,22 @@ const loading  = document.querySelector(".loaderContent");
 const select = document.querySelector("select");
 
 let global = [];
-// ? add a search field?
-// ? Make this in to a function
 
 setTimeout(function () {
 fetch(url)
     .then(response => response.json())
     .then(data => {
+
         global = data.items;
-        console.log(global);
         createHTML();
     })
     .catch(error => {
-        console.log("An error occurred");
         content.innerHTML = errorMessage(` <p>${error}.</p> <p>404 - An error occurred when calling the API. Check that user id and bookself id is correct.</p>`);
 
     }) 
-
-    console.log("done loading!")
     loading.classList.add("hide");
 
-}, 1500);
+}, 1000);
 
 
 function createHTML() {
@@ -39,8 +34,6 @@ function createHTML() {
     const authorsArray = [];
 
     document.title = `My library`;
-
-    // ? do this with a foreach?
 
     for (let i = 0; i < booksInMyLibrary.length; i++) {
         const bookInfo = booksInMyLibrary[i].volumeInfo;
@@ -60,10 +53,8 @@ function createHTML() {
         </div>`
     }
 
-    // remove the dobble valuse in the array with authors
     let removeDubbleValuse = [...new Set(authorsArray)];
 
-    // Outputs the options in the selction list. 
     for (let a = 0; a < removeDubbleValuse.length; a++) {
         const author = removeDubbleValuse[a];
 
@@ -117,5 +108,5 @@ function viewBooksByChoiucenAuthor(event) {
         
         createHTML();
     }
-}, 1500);
+}, 1000);
 }
